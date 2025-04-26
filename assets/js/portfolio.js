@@ -1,4 +1,9 @@
 // assets/js/portfolio.js
+const carousel = document.querySelector('.carousel');
+const items = document.querySelectorAll('.carousel-item');
+const prevBtn = document.querySelector('.carousel-prev');
+const nextBtn = document.querySelector('.carousel-next');
+let currentIndex = 0;
 
 function setupThemeToggle() {
     const themeToggleBtn = document.getElementById('theme-toggle');
@@ -101,42 +106,41 @@ function setupAlertCloseButtons() {
     });
 }
 
-function setupCarousels() {
-    const carousels = document.querySelectorAll('.swiper');
-    if (!carousels.length || typeof Swiper === 'undefined') return;
-
-    carousels.forEach(container => {
-        new Swiper(container, {
-            loop: true,
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            // Debug
-            on: {
-                init: function() {
-                    console.log('Swiper initialized', container);
-                },
-                error: function(e) {
-                    console.error('Swiper error', e);
-                }
-            }
-        });
+function showItem(index) {
+    items.forEach((item, i) => {
+        item.classList.toggle('opacity-100', i === index);
+        item.classList.toggle('opacity-0', i !== index);
     });
 }
 
-// Initialisation unique quand le DOM est chargé
+prevBtn.addEventListener('click', function() {
+    currentIndex = (currentIndex - 1 + items.length) % items.length;
+    showItem(currentIndex);
+});
+
+nextBtn.addEventListener('click', function() {
+    currentIndex = (currentIndex + 1) % items.length;
+    showItem(currentIndex);
+});
+
+// Rotation automatique optionnelle
+let interval = setInterval(() => {
+    currentIndex = (currentIndex + 1) % items.length;
+    showItem(currentIndex);
+}, 50000);
+
+// Arrêter le carrousel au survol
+carousel.addEventListener('mouseenter', () => clearInterval(interval));
+carousel.addEventListener('mouseleave', () => {
+    interval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % items.length;
+        showItem(currentIndex);
+    }, 5000);
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     setupThemeToggle();
     setupExperienceFilters();
     setupAlertCloseButtons();
-    setupCarousels();
+    showItem(currentIndex);
 });
