@@ -1,0 +1,17 @@
+{# templates/emails/contact.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nouveau message de contact</title>
+</head>
+<body>
+    <h1>Nouveau message de {{ contact.name }}</h1>
+    
+    <p><strong>Email :</strong> {{ contact.email }}</p>
+    
+    <p><strong>Message :</strong></p>
+    <p>{{ contact.message|nl2br }}</p>
+    
+    <p>Envoyé le {{ contact.createdAt|format_datetime('long', 'short') }}</p>
+</body>
+</html>
