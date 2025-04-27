@@ -2,7 +2,4 @@
 @import './custom.css';
 @custom-variant dark (&:where(.dark, .dark *));
 
-body {
-    background-color: skyblue;
-}
 

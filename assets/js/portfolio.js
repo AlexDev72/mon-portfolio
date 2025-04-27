@@ -1,19 +1,18 @@
 // assets/js/portfolio.js
-const carousel = document.querySelector('.carousel');
-const items = document.querySelectorAll('.carousel-item');
-const prevBtn = document.querySelector('.carousel-prev');
-const nextBtn = document.querySelector('.carousel-next');
-let currentIndex = 0;
 
-function setupThemeToggle() {
+// Gère le switch entre thème clair et sombre
+const setupThemeToggle = () => {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const darkIcon = document.getElementById('theme-toggle-dark-icon');
     const lightIcon = document.getElementById('theme-toggle-light-icon');
 
     if (!themeToggleBtn || !darkIcon || !lightIcon) return;
 
-    // Vérifie le thème stocké ou la préférence système
-    if (localStorage.getItem('color-theme') === 'dark' || (!localStorage.getItem('color-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    // Applique le thème en fonction du localStorage ou des préférences système
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const storedTheme = localStorage.getItem('color-theme');
+
+    if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
         document.documentElement.classList.add('dark');
         lightIcon.classList.remove('hidden');
         darkIcon.classList.add('hidden');
@@ -23,22 +22,18 @@ function setupThemeToggle() {
         darkIcon.classList.remove('hidden');
     }
 
-    // Gestion du clic
-    themeToggleBtn.addEventListener('click', function() {
+    // Clic sur le bouton => toggle le thème
+    themeToggleBtn.addEventListener('click', () => {
         lightIcon.classList.toggle('hidden');
         darkIcon.classList.toggle('hidden');
-        
-        if (document.documentElement.classList.contains('dark')) {
-            document.documentElement.classList.remove('dark');
-            localStorage.setItem('color-theme', 'light');
-        } else {
-            document.documentElement.classList.add('dark');
-            localStorage.setItem('color-theme', 'dark');
-        }
-    });
-}
 
-function setupExperienceFilters() {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+    });
+};
+
+// Gère les filtres d'expériences (pro et formation)
+const setupExperienceFilters = () => {
     const filterButtons = document.querySelectorAll('.filter-btn');
     const proItems = document.querySelectorAll('.pro-item');
     const formationItems = document.querySelectorAll('.formation-item');
@@ -46,10 +41,10 @@ function setupExperienceFilters() {
 
     if (!filterButtons.length || !gridContainer) return;
 
-    function filterItems(filter) {
+    const filterItems = (filter) => {
         let visibleItems = 0;
-        
-        // Gestion de la visibilité des éléments
+
+        // Affiche ou masque les expériences pro
         proItems.forEach(item => {
             if (filter === 'all' || filter === 'pro') {
                 item.classList.remove('hidden');
@@ -59,6 +54,7 @@ function setupExperienceFilters() {
             }
         });
 
+        // Affiche ou masque les formations
         formationItems.forEach(item => {
             if (filter === 'all' || filter === 'formation') {
                 item.classList.remove('hidden');
@@ -68,32 +64,31 @@ function setupExperienceFilters() {
             }
         });
 
-        // Adaptation de la grille
+        // Ajuste la grille en fonction du nombre d'items visibles
         gridContainer.classList.toggle('md:grid-cols-1', visibleItems === 1);
         gridContainer.classList.toggle('md:grid-cols-2', visibleItems !== 1);
 
-        // Mise à jour des styles des boutons (seulement les backgrounds)
+        // Met à jour le style actif des boutons
         filterButtons.forEach(btn => {
             const isActive = btn.dataset.filter === filter;
             btn.classList.toggle('bg-primary', isActive);
             btn.classList.toggle('bg-gray-200', !isActive);
             btn.classList.toggle('dark:bg-gray-600', !isActive);
         });
-    }
+    };
 
-    // Ajout des écouteurs d'événements
+    // Ajoute les écouteurs sur chaque bouton
     filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            filterItems(button.dataset.filter);
-        });
+        button.addEventListener('click', () => filterItems(button.dataset.filter));
     });
 
-    // Initialisation
+    // Charge tout au départ
     filterItems('all');
-}
+};
 
-function setupAlertCloseButtons() {
-    document.addEventListener('click', function(e) {
+// Permet de fermer les alertes en cliquant dessus
+const setupAlertCloseButtons = () => {
+    document.addEventListener('click', (e) => {
         const closeBtn = e.target.closest('.close-alert');
         if (closeBtn) {
             const alert = closeBtn.closest('.bg-green-500, .bg-red-500');
@@ -104,43 +99,62 @@ function setupAlertCloseButtons() {
             }
         }
     });
+};
+
+// Gère un carrousel basique (pas d'auto-rotation)
+class Carousel {
+    constructor(containerId) {
+        this.container = document.getElementById(containerId);
+        this.items = this.container?.querySelectorAll('.carousel-item') || [];
+        this.currentIndex = 0;
+
+        if (!this.container || !this.items.length) return;
+
+        this.showItem(this.currentIndex);
+        this.setupControls();
+    }
+
+    // Affiche uniquement l'item actuel
+    showItem(index) {
+        this.items.forEach((item, i) => {
+            item.classList.toggle('opacity-100', i === index);
+            item.classList.toggle('opacity-0', i !== index);
+        });
+    }
+
+    // Passe à l'item précédent
+    prev() {
+        this.currentIndex = (this.currentIndex - 1 + this.items.length) % this.items.length;
+        this.showItem(this.currentIndex);
+    }
+
+    // Passe à l'item suivant
+    next() {
+        this.currentIndex = (this.currentIndex + 1) % this.items.length;
+        this.showItem(this.currentIndex);
+    }
+
+    // Lie les boutons "précédent" et "suivant" aux méthodes
+    setupControls() {
+        const baseId = this.container.id.replace('-carousel', '');
+        const prevBtns = document.querySelectorAll(`[data-carousel="${baseId}"].carousel-prev`);
+        const nextBtns = document.querySelectorAll(`[data-carousel="${baseId}"].carousel-next`);
+
+        prevBtns.forEach(btn => btn.addEventListener('click', () => this.prev()));
+        nextBtns.forEach(btn => btn.addEventListener('click', () => this.next()));
+    }
 }
 
-function showItem(index) {
-    items.forEach((item, i) => {
-        item.classList.toggle('opacity-100', i === index);
-        item.classList.toggle('opacity-0', i !== index);
-    });
-}
-
-prevBtn.addEventListener('click', function() {
-    currentIndex = (currentIndex - 1 + items.length) % items.length;
-    showItem(currentIndex);
-});
-
-nextBtn.addEventListener('click', function() {
-    currentIndex = (currentIndex + 1) % items.length;
-    showItem(currentIndex);
-});
-
-// Rotation automatique optionnelle
-let interval = setInterval(() => {
-    currentIndex = (currentIndex + 1) % items.length;
-    showItem(currentIndex);
-}, 50000);
-
-// Arrêter le carrousel au survol
-carousel.addEventListener('mouseenter', () => clearInterval(interval));
-carousel.addEventListener('mouseleave', () => {
-    interval = setInterval(() => {
-        currentIndex = (currentIndex + 1) % items.length;
-        showItem(currentIndex);
-    }, 5000);
-});
-
+// Lance tout quand le DOM est prêt
 document.addEventListener('DOMContentLoaded', () => {
     setupThemeToggle();
     setupExperienceFilters();
     setupAlertCloseButtons();
-    showItem(currentIndex);
+
+    // Initialise les carrousels uniquement s'ils existent
+    ['snake-carousel', 'miette-carousel'].forEach(id => {
+        if (document.getElementById(id)) {
+            new Carousel(id);
+        }
+    });
 });
