@@ -6,6 +6,7 @@ namespace App\Form;
 
 use App\Entity\Contact;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,6 +40,11 @@ class ContactType extends AbstractType
                     'placeholder' => 'Votre message',
                     'autocomplete' => 'off'
                 ]
+            ])
+            ->add('rgpdConsent', CheckboxType::class, [
+                'label' => false,
+                'required' => true,
+                'mapped' => true,
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Envoyer'

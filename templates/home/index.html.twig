@@ -13,7 +13,9 @@
 	<nav class="bg-white dark:bg-gray-800 shadow-md py-4 sticky top-0 z-50 transition-colors duration-300">
 		<div class="container mx-auto px-6 flex justify-between items-center">
 			<a href="#" class="text-2xl font-bold text-primary dark:text-white">Alex El M.</a>
-			<div class="flex items-center space-x-8">
+			<div
+				class="flex items-center space-x-8">
+				<!-- Menu Desktop -->
 				<div class="hidden md:flex space-x-8">
 					<a href="#about" class="hover:text-primary transition dark:text-gray-300 dark:hover:text-white">À Propos</a>
 					<a href="#skills" class="hover:text-primary transition dark:text-gray-300 dark:hover:text-white">Compétences</a>
@@ -31,12 +33,21 @@
 					</svg>
 				</button>
 
-				<button class="md:hidden text-gray-700 dark:text-gray-300 cursor-pointer">
+				<!-- Bouton Burger -->
+				<button id="mobile-menu-button" class="md:hidden text-gray-700 dark:text-gray-300 cursor-pointer">
 					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
 						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
 					</svg>
 				</button>
 			</div>
+		</div>
+
+		<!-- Menu Mobile -->
+		<div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 px-6 py-4 transition-all duration-300">
+			<a href="#about" class="block py-2 hover:text-primary transition dark:text-gray-300 dark:hover:text-white">À Propos</a>
+			<a href="#skills" class="block py-2 hover:text-primary transition dark:text-gray-300 dark:hover:text-white">Compétences</a>
+			<a href="#experience" class="block py-2 hover:text-primary transition dark:text-gray-300 dark:hover:text-white">Expériences</a>
+			<a href="#contact" class="block py-2 hover:text-primary transition dark:text-gray-300 dark:hover:text-white">Contact</a>
 		</div>
 	</nav>
 
@@ -62,35 +73,45 @@
 
 	<!-- Hero Section -->
 	<section class="py-20 bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-white transition-colors duration-300">
-		<div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
-			<div class="md:w-1/2 mb-10 md:mb-0">
-				<h1 class="text-4xl md:text-5xl font-bold mb-4">Alex El Moutaouakil</h1>
-				<h2 class="text-2xl md:text-3xl text-blue-200 dark:text-blue-300 mb-6">Concepteur Développeur d'Applications</h2>
-				<div
-					class="flex space-x-4">
-					<!-- Bouton CV (référence de taille) -->
-					<a href="{{ asset('build/CV_Alex_El_Moutaouakil.pdf') }}" download="CV_Alex_El_Moutaouakil.pdf" class="border border-primary text-primary dark:text-white dark:border-white px-6 py-3 rounded-lg hover:bg-blue-100/50 dark:hover:bg-gray-700/50 transition flex items-center justify-center">
-						Voir mon CV
-					</a>
-					<!-- Bouton LinkedIn -->
-					<a href="https://www.linkedin.com/in/votre-profil-linkedin/" target="_blank" class="border border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 px-6 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center justify-center w-[calc(1.5rem*2+1.5rem*2+4.5rem)]">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-							<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-						</svg>
-					</a>
+		<div class="container mx-auto px-6">
+			<div
+				class="flex flex-col md:flex-row items-center">
+				<!-- Partie Texte -->
+				<div class="md:w-1/2 mb-10 md:mb-0 px-4 md:px-0">
+					<h1 class="text-4xl md:text-5xl font-bold mb-4 break-words">Alex El Moutaouakil</h1>
+					<h2 class="text-2xl md:text-3xl text-blue-200 dark:text-blue-300 mb-6">Concepteur Développeur d'Applications</h2>
 
-					<!-- Bouton GitHub -->
-					<a href="https://github.com/AlexDev72" target="_blank" class="border border-gray-800 text-gray-800 dark:text-gray-300 dark:border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition flex items-center justify-center w-[calc(1.5rem*2+1.5rem*2+4.5rem)]">
-						<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="currentColor" class="w-6 h-6">
-							<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-						</svg>
-					</a>
+					<div
+						class="flex flex-wrap gap-4">
+						<!-- Bouton CV -->
+						<a href="{{ asset('build/CV_Alex_El_Moutaouakil.pdf') }}" download="CV_Alex_El_Moutaouakil.pdf" class="border border-primary text-primary dark:text-white dark:border-white px-6 py-3 rounded-lg hover:bg-blue-100/50 dark:hover:bg-gray-700/50 transition flex items-center justify-center min-w-[180px]">
+							Voir mon CV
+						</a>
+
+						<!-- Bouton LinkedIn -->
+						<a href="https://www.linkedin.com/in/votre-profil-linkedin/" target="_blank" class="border border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 px-6 py-3 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition flex items-center justify-center gap-2 min-w-[180px]">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+								<path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+							</svg>
+							<span>LinkedIn</span>
+						</a>
+
+						<!-- Bouton GitHub -->
+						<a href="https://github.com/AlexDev72" target="_blank" class="border border-gray-800 text-gray-800 dark:text-gray-300 dark:border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition flex items-center justify-center gap-2 min-w-[180px]">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+								<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+							</svg>
+							<span>GitHub</span>
+						</a>
+					</div>
 				</div>
-			</div>
-			<div class="md:w-1/2 flex justify-center">
-				<div class="bg-white dark:bg-gray-700 p-2 rounded-full shadow-xl transition-colors duration-300">
-					<div class="bg-gray-200 dark:bg-gray-600 w-64 h-64 rounded-full overflow-hidden transition-colors duration-300">
-						<img src="{{ asset('images/profile.jpeg') }}" alt="Alex El Moutaouakil" class="w-full h-full object-cover">
+
+				<!-- Partie Image -->
+				<div class="md:w-1/2 flex justify-center">
+					<div class="bg-white dark:bg-gray-700 p-2 rounded-full shadow-xl transition-colors duration-300">
+						<div class="bg-gray-200 dark:bg-gray-600 w-64 h-64 rounded-full overflow-hidden transition-colors duration-300">
+							<img src="{{ asset('images/profile.jpeg') }}" alt="Alex El Moutaouakil" class="w-full h-full object-cover">
+						</div>
 					</div>
 				</div>
 			</div>
@@ -223,22 +244,21 @@
 		</div>
 	</section>
 
-
-	{# Ajout cette section après la section Compétences et avant la section Expérience #}
+	{# Section Projet #}
 	<section id="projects" class="py-16 bg-gray-100 dark:bg-gray-700 transition-colors duration-300">
 		<div class="container mx-auto px-6">
 			<h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Mes Projets</h2>
 
 			<div
-				class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+				class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 ">
 				{# Projet 1 #}
 				<div
 					class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
 					<!-- Conteneur image avec ratio 16:9 -->
 					<div
-						class="relative pt-[56.25%]">
+						class="relative pt-[56.25%] cursor-pointer">
 						<!-- 16:9 ratio -->
-						<img src="{{ asset('images/portfo.png') }}" alt="Capture d'écran du portfolio" class="absolute top-0 left-0 w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+						<img src="{{ asset('images/portfo.png') }}" data-modal-image="{{ asset('images/portfo.png') }}" alt="Capture d'écran du portfolio" class="absolute top-0 left-0 w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
 					</div>
 
 					<div class="p-6 flex-grow">
@@ -270,14 +290,14 @@
 							class="absolute top-0 left-0 w-full h-full">
 							<!-- Images du carrousel -->
 							<div
-								id="snake-carousel" class="carousel relative h-full w-full">
+								id="snake-carousel" class="carousel relative h-full w-full cursor-pointer">
 								<!-- Image 1 -->
 								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-100 transition-opacity duration-500">
-									<img src="{{ asset('images/snake1.png') }}" alt="Capture d'écran 1 du jeu Snake" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+									<img src="{{ asset('images/snake1.png') }}" data-modal-image="{{ asset('images/snake1.png') }}" alt="Capture d'écran 1 du jeu Snake" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
 								</div>
 								<!-- Image 2 -->
 								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
-									<img src="{{ asset('images/snake2.png') }}" alt="Capture d'écran 2 du jeu Snake" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+									<img src="{{ asset('images/snake2.png') }}" data-modal-image="{{ asset('images/snake2.png') }}" alt="Capture d'écran 2 du jeu Snake" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
 								</div>
 							</div>
 
@@ -320,7 +340,7 @@
 					</div>
 				</div>
 
-				{# Projet 3 - Canva #}
+				{# Projet 3 - La Miette de Pain #}
 				<div
 					class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col h-full">
 					<!-- Conteneur carrousel avec ratio 16:9 -->
@@ -331,14 +351,23 @@
 							class="absolute top-0 left-0 w-full h-full">
 							<!-- Images du carrousel -->
 							<div
-								id="miette-carousel" class="carousel relative h-full w-full">
+								id="miette-carousel" class="carousel relative h-full w-full cursor-pointer">
 								<!-- Image 1 -->
-								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-100 transition-opacity duration-500">
-									<img src="{{ asset('images/lamiettedepain.png') }}" alt="Capture d'écran 1 du site La Miette de Pain" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
+									<img src="{{ asset('images/lamiettedepain1.png') }}" data-modal-image="{{ asset('images/lamiettedepain1.png') }}" alt="Capture d'écran 2 du site La Miette de Pain" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
 								</div>
 								<!-- Image 2 -->
 								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
-									<img src="{{ asset('images/lamiettedepain1.png') }}" alt="Capture d'écran 2 du site La Miette de Pain" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+									<img src="{{ asset('images/lamiettedepain2.png') }}" data-modal-image="{{ asset('images/lamiettedepain2.png') }}" alt="Capture d'écran 2 du site La Miette de Pain" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+								</div>
+								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
+									<img src="{{ asset('images/lamiettedepain3.png') }}" data-modal-image="{{ asset('images/lamiettedepain3.png') }}" alt="Capture d'écran 2 du site La Miette de Pain" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+								</div>
+								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
+									<img src="{{ asset('images/lamiettedepain4.png') }}" data-modal-image="{{ asset('images/lamiettedepain4.png') }}" alt="Capture d'écran 2 du site La Miette de Pain" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+								</div>
+								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
+									<img src="{{ asset('images/lamiettedepain5.png') }}" data-modal-image="{{ asset('images/lamiettedepain5.png') }}" alt="Capture d'écran 2 du site La Miette de Pain" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
 								</div>
 							</div>
 
@@ -382,6 +411,7 @@
 						</div>
 					</div>
 				</div>
+
 				{# Lien vers GitHub #}
 				<div class="text-center mt-12">
 					<a href="https://github.com/AlexDev72" target="_blank" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 dark:bg-gray-600 hover:bg-gray-700 dark:hover:bg-gray-500 transition">
@@ -394,7 +424,36 @@
 			</div>
 		</div>
 	</section>
-	
+
+	<!-- Modal pour afficher les images en grand -->
+	<div id="image-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 p-4">
+		<div class="relative max-w-4xl w-full mx-4">
+			<button id="close-modal" class="absolute -top-10 right-0 text-white hover:text-gray-300 cursor-pointer z-10">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+				</svg>
+			</button>
+
+			<!-- Bouton précédent -->
+			<button id="modal-prev" class="absolute left-2 sm:left-0 top-1/2 transform -translate-y-1/2 sm:-translate-x-12 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 transition-colors duration-300 cursor-pointer z-10">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+				</svg>
+			</button>
+
+			<!-- Image -->
+			<img
+			id="modal-image" src="" alt="Image en grand" class="max-h-[90vh] w-full object-contain">
+
+			<!-- Bouton suivant -->
+			<button id="modal-next" class="absolute right-2 sm:right-0 top-1/2 transform -translate-y-1/2 sm:translate-x-12 bg-black/50 text-white p-2 rounded-full hover:bg-black/75 transition-colors duration-300 cursor-pointer z-10">
+				<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+				</svg>
+			</button>
+		</div>
+	</div>
+
 	{# Section Expérience/Formation avec filtres #}
 	<section id="experience" class="py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
 		<div class="container mx-auto px-6">
@@ -475,46 +534,125 @@
 			</div>
 		</div>
 	</section>
-	
-		{# Section Contact #}
-		<section id="contact" class="py-16 bg-gray-100 dark:bg-gray-700 transition-colors duration-300">
-			<div class="container mx-auto px-6">
-				<h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Contactez-moi</h2>
-				<div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md transition-colors duration-300">
-					{{ form_start(contactForm, {'attr': {'class': 'space-y-4'}}) }}
-					<div>
-						{{ form_label(contactForm.name, null, {'label_attr': {'class': 'block mb-2 font-medium text-gray-900 dark:text-white'}}) }}
-						{{ form_widget(contactForm.name, {'attr': {'class': 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white'}}) }}
-					</div>
-					<div>
-						{{ form_label(contactForm.email, null, {'label_attr': {'class': 'block mb-2 font-medium text-gray-900 dark:text-white'}}) }}
-						{{ form_widget(contactForm.email, {'attr': {'class': 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white'}}) }}
-					</div>
-					<div>
-						{{ form_label(contactForm.message, null, {'label_attr': {'class': 'block mb-2 font-medium text-gray-900 dark:text-white'}}) }}
-						{{ form_widget(contactForm.message, {'attr': {'class': 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white'}}) }}
-					</div>
-					{{ form_widget(contactForm.submit, {'attr': {'class': 'w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg transition cursor-pointer'}}) }}
 
+	{# Section Contact #}
+	<section id="contact" class="py-16 bg-gray-100 dark:bg-gray-700 transition-colors duration-300">
+		<div class="container mx-auto px-6">
+			<h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Contactez-moi</h2>
+			<div class="max-w-2xl mx-auto bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md transition-colors duration-300">
+				{{ form_start(contactForm, {'attr': {'class': 'space-y-4'}}) }}
+				<div>
+					{{ form_label(contactForm.name, null, {'label_attr': {'class': 'block mb-2 font-medium text-gray-900 dark:text-white'}}) }}
+					{{ form_widget(contactForm.name, {'attr': {'class': 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white'}}) }}
+				</div>
+				<div>
+					{{ form_label(contactForm.email, null, {'label_attr': {'class': 'block mb-2 font-medium text-gray-900 dark:text-white'}}) }}
+					{{ form_widget(contactForm.email, {'attr': {'class': 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white'}}) }}
+				</div>
+				<div>
+					{{ form_label(contactForm.message, null, {'label_attr': {'class': 'block mb-2 font-medium text-gray-900 dark:text-white'}}) }}
+					{{ form_widget(contactForm.message, {'attr': {'class': 'w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:bg-gray-700 dark:border-gray-600 dark:text-white'}}) }}
+				</div>
 
-					{{ form_end(contactForm) }}
+				{# Ajout du consentement RGPD #}
+				<div class="flex items-start">
+					<div class="flex items-center h-5 cursor-pointer">
+						{{ form_widget(contactForm.rgpdConsent, {'attr': {'class': 'w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800'}}) }}
+					</div>
+					<div class="ml-3 text-sm">
+						<label for="{{ contactForm.rgpdConsent.vars.id }}" class="font-medium text-gray-900 dark:text-gray-300">
+							J'accepte la
+							<button type="button" onclick="document.getElementById('privacyModal').classList.remove('hidden')" class="text-blue-600 hover:underline dark:text-blue-500 focus:outline-none cursor-pointer">
+								politique de confidentialité
+							</button>
+							et que mes données soient utilisées exclusivement pour répondre à ma demande.
+						</label>
+					</div>
+				</div>
+
+				{{ form_widget(contactForm.submit, {'attr': {'class': 'w-full bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg transition cursor-pointer'}}) }}
+				{{ form_end(contactForm) }}
+			</div>
+		</div>
+	</section>
+
+	{# Modal Politique de Confidentialité #}
+	<div id="privacyModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm transition-opacity duration-300">
+		<div
+			class="relative w-full max-w-2xl max-h-[90vh] overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-2xl transform transition-all duration-300 ease-in-out">
+			{# Header #}
+			<div class="flex items-center justify-between p-6 border-b border-gray-100 dark:border-gray-700">
+				<h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 inline-block mr-2 text-blue-500" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+					</svg>
+					Politique de confidentialité
+				</h3>
+				<button onclick="document.getElementById('privacyModal').classList.add('hidden')" class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors cursor-pointer">
+					<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-500 dark:text-gray-400" fill="none" viewbox="0 0 24 24" stroke="currentColor">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+					</svg>
+				</button>
+			</div>
+
+			{# Content #}
+			<div class="p-6 overflow-y-auto max-h-[60vh] custom-scrollbar">
+				<div class="prose prose-gray dark:prose-invert max-w-none">
+					<h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 flex items-center">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-400" viewbox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+						</svg>
+						Traitement des données
+					</h4>
+					<p class="text-gray-600 dark:text-gray-300 pl-7">
+						Les informations recueillies via ce formulaire sont utilisées exclusivement pour traiter votre demande et ne seront jamais partagées avec des tiers sans votre consentement explicite.
+					</p>
+
+					<h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mt-6 flex items-center">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-400" viewbox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+						</svg>
+						Conservation des données
+					</h4>
+					<p class="text-gray-600 dark:text-gray-300 pl-7">
+						Vos données personnelles sont conservées pendant une durée maximale de 6 mois après le traitement de votre demande, sauf obligation légale contraire.
+					</p>
+
+					<h4 class="text-lg font-medium text-gray-800 dark:text-gray-200 mt-6 flex items-center">
+						<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-blue-400" viewbox="0 0 20 20" fill="currentColor">
+							<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2h-1V9z" clip-rule="evenodd"/>
+						</svg>
+						Vos droits
+					</h4>
+					<p class="text-gray-600 dark:text-gray-300 pl-7">
+						Conformément au RGPD, vous disposez d'un droit d'accès, de rectification, d'effacement et de portabilité de vos données. Vous pouvez exercer ces droits en nous contactant.
+					</p>
 				</div>
 			</div>
-		</section>
 
-		<!-- Footer -->
-		<footer class="footer bg-dark dark:bg-gray-900 text-black py-8 transition-colors duration-300">
-			<div class="container mx-auto px-6 text-center">
-				<p>&copy;
-					{{ 'now'|date('Y') }}
-					Alex El Moutaouakil. Tous droits réservés.</p>
+			{# Footer #}
+			<div class="flex justify-end p-6 border-t border-gray-100 dark:border-gray-700">
+				<button onclick="document.getElementById('privacyModal').classList.add('hidden')" class="px-6 py-2.5 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all shadow-sm cursor-pointer">
+					J'ai compris
+				</button>
 			</div>
-		</footer>
-	{% endblock %}
+		</div>
+	</div>
 
-	{% block javascripts %}
-		{{ parent() }}
-		<!-- Scripts Swiper -->
-		<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 
-	{% endblock %}
+	<!-- Footer -->
+	<footer class="footer bg-dark dark:bg-gray-900 text-black py-8 transition-colors duration-300">
+		<div class="container mx-auto px-6 text-center">
+			<p>&copy;
+				{{ 'now'|date('Y') }}
+				Alex El Moutaouakil. Tous droits réservés.</p>
+		</div>
+	</footer>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<!-- Scripts Swiper -->
+	<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+
+{% endblock %}

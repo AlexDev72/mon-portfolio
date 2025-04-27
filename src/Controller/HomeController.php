@@ -14,7 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-
     private LoggerInterface $logger;
 
     public function __construct(LoggerInterface $logger)
@@ -28,16 +27,17 @@ class HomeController extends AbstractController
         EntityManagerInterface $entityManager,
         ContactMailer $contactMailer
     ): Response {
-        // Création d'une nouvelle instance Contact
         $contact = new Contact();
-        
-        // Création du formulaire
         $form = $this->createForm(ContactType::class, $contact);
-        
-        // Traitement de la soumission du formulaire
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
+            // Vérification du consentement RGPD
+            if (!$contact->isRgpdConsent()) {
+                $this->addFlash('error', 'Vous devez accepter notre politique de confidentialité pour envoyer le formulaire.');
+                return $this->redirectToRoute('home');
+            }
+
             try {
                 $contact->setCreatedAt(new \DateTimeImmutable());
                 $entityManager->persist($contact);
@@ -45,15 +45,12 @@ class HomeController extends AbstractController
                 
                 $this->addFlash('info', 'Données sauvegardées avec succès.');
                 
-                // Utilisez le LoggerInterface injecté ou le service logger
                 $this->logger->info('Tentative d\'envoi d\'email...');
-                
                 $contactMailer->sendContactNotification($contact);
                 
                 $this->addFlash('success', 'Votre message a été envoyé !');
                 return $this->redirectToRoute('home');
             } catch (\Exception $e) {
-                // Utilisez le LoggerInterface
                 $this->logger->error('Erreur lors de l\'envoi: '.$e->getMessage());
                 $this->logger->error($e->getTraceAsString());
                 
@@ -61,7 +58,6 @@ class HomeController extends AbstractController
             }
         }
 
-        // Rendu de la vue
         return $this->render('home/index.html.twig', [
             'contactForm' => $form->createView(),
         ]);

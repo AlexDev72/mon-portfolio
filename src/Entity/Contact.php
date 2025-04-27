@@ -26,6 +26,9 @@ class Contact
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\Column]
+    private ?bool $rgpdConsent = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Contact
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isRgpdConsent(): ?bool
+    {
+        return $this->rgpdConsent;
+    }
+
+    public function setRgpdConsent(bool $rgpdConsent): static
+    {
+        $this->rgpdConsent = $rgpdConsent;
 
         return $this;
     }

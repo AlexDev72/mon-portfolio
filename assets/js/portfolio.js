@@ -1,36 +1,51 @@
 // assets/js/portfolio.js
 
 // Gère le switch entre thème clair et sombre
-const setupThemeToggle = () => {
+function setupThemeToggle() {
     const themeToggleBtn = document.getElementById('theme-toggle');
     const darkIcon = document.getElementById('theme-toggle-dark-icon');
     const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-    if (!themeToggleBtn || !darkIcon || !lightIcon) return;
-
-    // Applique le thème en fonction du localStorage ou des préférences système
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const storedTheme = localStorage.getItem('color-theme');
-
-    if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
-        document.documentElement.classList.add('dark');
-        lightIcon.classList.remove('hidden');
-        darkIcon.classList.add('hidden');
-    } else {
-        document.documentElement.classList.remove('dark');
-        lightIcon.classList.add('hidden');
-        darkIcon.classList.remove('hidden');
+    if (!themeToggleBtn || !darkIcon || !lightIcon) {
+        console.error('Theme toggle elements not found!');
+        return;
     }
 
-    // Clic sur le bouton => toggle le thème
-    themeToggleBtn.addEventListener('click', () => {
-        lightIcon.classList.toggle('hidden');
-        darkIcon.classList.toggle('hidden');
+    // Check initial theme
+    const storedTheme = localStorage.getItem('color-theme');
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    // Apply initial theme
+    if (storedTheme === 'dark' || (!storedTheme && systemDark)) {
+        enableDarkMode();
+    } else {
+        enableLightMode();
+    }
 
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('color-theme', isDark ? 'dark' : 'light');
+    // Toggle on button click
+    themeToggleBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        if (isDark) {
+            enableLightMode();
+        } else {
+            enableDarkMode();
+        }
     });
-};
+
+    function enableDarkMode() {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+        darkIcon.classList.add('hidden');
+        lightIcon.classList.remove('hidden');
+    }
+
+    function enableLightMode() {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+        darkIcon.classList.remove('hidden');
+        lightIcon.classList.add('hidden');
+    }
+}
 
 // Gère les filtres d'expériences (pro et formation)
 const setupExperienceFilters = () => {
@@ -145,16 +160,156 @@ class Carousel {
     }
 }
 
+// Gère la modal pour afficher les images en grand
+class ImageModal {
+    constructor() {
+        this.modal = document.getElementById('image-modal');
+        this.modalImg = document.getElementById('modal-image');
+        this.closeModal = document.getElementById('close-modal');
+        this.prevBtn = document.getElementById('modal-prev');
+        this.nextBtn = document.getElementById('modal-next');
+        this.currentCarousel = null;
+        this.currentIndex = 0;
+        
+        if (!this.modal || !this.modalImg || !this.closeModal) return;
+        
+        this.setupEventListeners();
+    }
+    
+    setupEventListeners() {
+        // Ouvrir la modal quand on clique sur une image
+        document.querySelectorAll('[data-modal-image]').forEach(img => {
+            img.addEventListener('click', (e) => {
+                const carousel = e.target.closest('.carousel');
+                
+                if (carousel) {
+                    // Cas d'un carrousel
+                    this.currentCarousel = carousel.id;
+                    this.currentIndex = Array.from(document.querySelectorAll(`#${this.currentCarousel} .carousel-item`)).findIndex(
+                        item => item.contains(e.target)
+                    );
+                } else {
+                    // Cas d'une image simple
+                    this.currentCarousel = null;
+                    this.currentIndex = 0;
+                }
+                
+                this.openModal(e.target.dataset.modalImage);
+            });
+        });
+        
+        // Fermer la modal
+        this.closeModal.addEventListener('click', () => this.close());
+        
+        // Navigation avec les flèches du clavier
+        document.addEventListener('keydown', (e) => {
+            if (!this.modal.classList.contains('hidden')) {
+                if (e.key === 'Escape') {
+                    this.close();
+                } else if (e.key === 'ArrowLeft' && this.currentCarousel) {
+                    this.prevImage();
+                } else if (e.key === 'ArrowRight' && this.currentCarousel) {
+                    this.nextImage();
+                }
+            }
+        });
+        
+        // Boutons de navigation dans la modal
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.prevImage());
+        }
+        
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextImage());
+        }
+    }
+    
+    openModal(imageSrc) {
+        console.log(imageSrc);
+        this.modalImg.src = imageSrc;
+        this.modal.classList.remove('hidden');
+        this.modal.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+        
+        // Gestion des boutons de navigation
+        if (this.prevBtn && this.nextBtn) {
+            if (this.currentCarousel) {
+                const carousel = document.getElementById(this.currentCarousel);
+                const items = carousel ? carousel.querySelectorAll('.carousel-item') : [];
+                console.log('Nombre d\'images dans le carrousel:', items.length);
+                if (items.length > 1) {
+                    // Plusieurs images => afficher navigation
+                    this.prevBtn.classList.remove('hidden');
+                    this.nextBtn.classList.remove('hidden');
+                } else {
+                    // Seulement une image dans le carrousel
+                    this.prevBtn.classList.add('hidden');
+                    this.nextBtn.classList.add('hidden');
+                }
+            } else {
+                // Pas de carrousel => cacher navigation
+                this.prevBtn.classList.add('hidden');
+                this.nextBtn.classList.add('hidden');
+            }
+        }
+    }
+    
+    close() {
+        this.modal.classList.add('hidden');
+        this.modal.classList.remove('flex');
+        document.body.style.overflow = '';
+        this.currentCarousel = null;
+        this.currentIndex = 0;
+    }
+    
+    prevImage() {
+        if (!this.currentCarousel) return;
+        
+        const items = document.querySelectorAll(`#${this.currentCarousel} .carousel-item`);
+        this.currentIndex = (this.currentIndex - 1 + items.length) % items.length;
+        const newImage = items[this.currentIndex].querySelector('[data-modal-image]');
+        this.modalImg.src = newImage.dataset.modalImage;
+    }
+    
+    nextImage() {
+        if (!this.currentCarousel) return;
+        
+        const items = document.querySelectorAll(`#${this.currentCarousel} .carousel-item`);
+        this.currentIndex = (this.currentIndex + 1) % items.length;
+        const newImage = items[this.currentIndex].querySelector('[data-modal-image]');
+        this.modalImg.src = newImage.dataset.modalImage;
+    }
+}
+
 // Lance tout quand le DOM est prêt
 document.addEventListener('DOMContentLoaded', () => {
+
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuButton.addEventListener('click', function() {
+        mobileMenu.classList.toggle('hidden');
+    });
+    
+    // Optionnel: Fermer le menu quand on clique sur un lien
+    const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+    mobileMenuLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+
     setupThemeToggle();
     setupExperienceFilters();
     setupAlertCloseButtons();
-
     // Initialise les carrousels uniquement s'ils existent
     ['snake-carousel', 'miette-carousel'].forEach(id => {
         if (document.getElementById(id)) {
             new Carousel(id);
         }
     });
+    
+    // Initialise la modal d'images
+    new ImageModal();
 });
+
