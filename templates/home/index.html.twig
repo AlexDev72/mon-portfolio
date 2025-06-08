@@ -19,6 +19,7 @@
 				<div class="hidden md:flex space-x-8">
 					<a href="#about" class="hover:text-primary transition dark:text-gray-300 dark:hover:text-white">À Propos</a>
 					<a href="#skills" class="hover:text-primary transition dark:text-gray-300 dark:hover:text-white">Compétences</a>
+					<a href="#projects" class="hover:text-primary transition dark:text-gray-300 dark:hover:text-white">Projets</a>
 					<a href="#experience" class="hover:text-primary transition dark:text-gray-300 dark:hover:text-white">Expériences</a>
 					<a href="#contact" class="hover:text-primary transition dark:text-gray-300 dark:hover:text-white">Contact</a>
 				</div>
@@ -180,10 +181,22 @@
 
 						<!-- JavaScript -->
 						<div class="flex flex-col items-center p-4 bg-gray-200 dark:bg-gray-700 rounded-lg shadow">
-							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="h-12 w-12 mb-2" alt="JavaScript"/>
-							<span class="text-sm text-gray-700 dark:text-gray-300">JavaScript</span>
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="h-12 w-12 mb-2" alt="JavaScript"/>
+							<span class="text-sm text-gray-700 dark:text-gray-300">React</span>
 						</div>
 
+						<!-- Java -->
+						<div class="flex flex-col items-center p-4 bg-gray-200 dark:bg-gray-700 rounded-lg shadow">
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="h-12 w-12 mb-2" alt="Java"/>
+							<span class="text-sm text-gray-700 dark:text-gray-300">Java</span>
+						</div>
+
+						<!-- Spring -->
+						<div class="flex flex-col items-center p-4 bg-gray-200 dark:bg-gray-700 rounded-lg shadow">
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" class="h-12 w-12 mb-2" alt="Spring"/>
+							<span class="text-sm text-gray-700 dark:text-gray-300">Springboot</span>
+						</div>
+						
 						<!-- MySQL -->
 						<div class="flex flex-col items-center p-4 bg-gray-200 dark:bg-gray-700 rounded-lg shadow">
 							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="h-12 w-12 mb-2" alt="MySQL"/>
@@ -194,12 +207,6 @@
 						<div class="flex flex-col items-center p-4 bg-gray-200 dark:bg-gray-700 rounded-lg shadow">
 							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="h-12 w-12 mb-2" alt="Git"/>
 							<span class="text-sm text-gray-700 dark:text-gray-300">Git</span>
-						</div>
-
-						<!-- Bootstrap -->
-						<div class="flex flex-col items-center p-4 bg-gray-200 dark:bg-gray-700 rounded-lg shadow">
-							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" class="h-12 w-12 mb-2" alt="Bootstrap"/>
-							<span class="text-sm text-gray-700 dark:text-gray-300">Bootstrap</span>
 						</div>
 
 						<!-- Tailwind -->
@@ -215,16 +222,10 @@
 					<h3 class="text-xl font-semibold mb-6 text-primary dark:text-blue-400">Autres Technologies</h3>
 					<div
 						class="grid grid-cols-3 gap-4">
-						<!-- Java -->
+						<!-- Bootstrap -->
 						<div class="flex flex-col items-center p-4 bg-gray-200 dark:bg-gray-700 rounded-lg shadow">
-							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="h-12 w-12 mb-2" alt="Java"/>
-							<span class="text-sm text-gray-700 dark:text-gray-300">Java</span>
-						</div>
-
-						<!-- Spring -->
-						<div class="flex flex-col items-center p-4 bg-gray-200 dark:bg-gray-700 rounded-lg shadow">
-							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" class="h-12 w-12 mb-2" alt="Spring"/>
-							<span class="text-sm text-gray-700 dark:text-gray-300">Spring</span>
+							<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" class="h-12 w-12 mb-2" alt="Bootstrap"/>
+							<span class="text-sm text-gray-700 dark:text-gray-300">Bootstrap</span>
 						</div>
 
 						<!-- C++ -->
@@ -246,7 +247,7 @@
 	{# Section Projet #}
 	<section id="projects" class="py-16 bg-gray-100 dark:bg-gray-700 transition-colors duration-300">
 		<div class="container mx-auto px-6">
-			<h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Mes Projets</h2>
+			<h2 class="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">Sélection de projets</h2>
 
 			<div
 				class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 ">
@@ -292,11 +293,23 @@
 								id="snake-carousel" class="carousel relative h-full w-full cursor-pointer">
 								<!-- Image 1 -->
 								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-100 transition-opacity duration-500">
-									<img src="{{ asset('images/snake1.png') }}" data-modal-image="{{ asset('images/snake1.png') }}" alt="Capture d'écran 1 du jeu Snake" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+									<img src="{{ asset('images/prelev1.png') }}" data-modal-image="{{ asset('images/prelev1.png') }}" alt="Capture d'écran 1 du prelev" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
 								</div>
 								<!-- Image 2 -->
 								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
-									<img src="{{ asset('images/snake2.png') }}" data-modal-image="{{ asset('images/snake2.png') }}" alt="Capture d'écran 2 du jeu Snake" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+									<img src="{{ asset('images/prelev2.png') }}" data-modal-image="{{ asset('images/prelev2.png') }}" alt="Capture d'écran 2 du prelev" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+								</div>
+								<!-- Image 3 -->
+								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
+									<img src="{{ asset('images/prelev3.png') }}" data-modal-image="{{ asset('images/prelev4.png') }}" alt="Capture d'écran 3 du prelev" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+								</div>
+								<!-- Image 4 -->
+								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
+									<img src="{{ asset('images/prelev4.png') }}" data-modal-image="{{ asset('images/prelev4.png') }}" alt="Capture d'écran 4 du prelev" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
+								</div>
+								<!-- Image 5 -->
+								<div class="carousel-item absolute top-0 left-0 w-full h-full opacity-0 transition-opacity duration-500">
+									<img src="{{ asset('images/prelev5.png') }}" data-modal-image="{{ asset('images/prelev5.png') }}" alt="Capture d'écran 5 du prelev" class="w-full h-full object-contain p-2 bg-gray-50 dark:bg-gray-600">
 								</div>
 							</div>
 
@@ -317,19 +330,21 @@
 					</div>
 
 					<div class="p-6 flex-grow">
-						<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Jeu du Snake</h3>
-						<p class="text-gray-600 dark:text-gray-300 mb-4">Développé en JavaScript/Php avec animations fluides
-							<br>- S'enregistrer via un pseudo
-							<br>- Tableau des 5 meilleurs scores des joueurs
-							<br>- Possibilité de jouer avec des flèches sur l'écran ou avec le clavier</p>
+						<h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Application Prelev' (Projet en cours)</h3>
+						<p class="text-gray-600 dark:text-gray-300 mb-4">Développé en Java/Springboot et React
+							<br>- Gestion du back en API rest avec springboot
+							<br>- Page tableau de bord - Page Calendrier - Page Profil - Page Ajout prélèvement
+							<br>- Connexion/Inscription (utilisation des JWT)</p>
 						<div class="flex flex-wrap gap-2 mb-4">
-							<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">JavaScript</span>
-							<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Php</span>
+							<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">React</span>
+							<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Java</span>
+							<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Springboot</span>
 							<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">HTML5</span>
 							<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">CSS3</span>
+							<span class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">Tailwind</span>
 						</div>
 						<div class="flex justify-between items-center mt-auto">
-							<a href="https://github.com/AlexDev72/Snake" target="_blank" class="inline-flex items-center text-primary dark:text-blue-400 hover:underline">
+							<a href="https://github.com/AlexDev72/Prelev" target="_blank" class="inline-flex items-center text-primary dark:text-blue-400 hover:underline">
 								Voir sur GitHub
 								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewbox="0 0 24 24" stroke="currentColor">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
